@@ -1,0 +1,57 @@
+﻿@model Root
+@{
+    ViewData["Title"] = "NewDeck";
+}
+
+<h1>Your Hand</h1>
+
+@if (Model.remaining >= 5)
+{
+    <div class="hand">
+        @foreach (Card card in Model.cards)
+        {
+            <div class="card">
+                <img src="@card.image" />
+                <p>@card.value of @card.suit</p>
+            </div>
+        }
+    </div>
+
+    <br />
+    <a href="/Home/Draw?DeckId=@Model.deck_id" class="btn btn-primary">Draw Next 5 Cards</a>
+    <p>@Model.remaining cards remaining in the deck</p>
+}
+else if (Model.remaining < 5 && Model.remaining > 0)
+{
+    <div class="hand">
+        @foreach (Card card in Model.cards)
+        {
+            <div class="card">
+                <img src="@card.image" />
+                <p>@card.value of @card.suit</p>
+            </div>
+        }
+    </div>
+
+    <br />
+    <a href="/Home/Draw?DeckId=@Model.deck_id" class="btn btn-primary">Draw Final @Model.remaining Cards</a>
+    <p>@Model.remaining cards remaining in the deck</p>
+}
+else
+{
+    <div class="hand">
+        @foreach (Card card in Model.cards)
+        {
+            <div class="card">
+                <img src="@card.image" />
+                <p>@card.value of @card.suit</p>
+            </div>
+        }
+    </div>
+
+    <br />
+    <p>No more cards left in that deck!</p>
+    <a href="/Home/NewDeck" class="btn btn-primary">Start a New Deck</a>
+}
+
+
